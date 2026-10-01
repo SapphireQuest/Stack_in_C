@@ -15,11 +15,19 @@ void init(struct Stack *s)
     }
 }
 
+
 void destroy(struct Stack *s)
 {
     free(s->data);
     s->data = NULL;
 }
+
+
+bool isEmpty(const struct Stack *s)
+{
+    return s->top == 0;
+}
+
 
 void push(struct Stack *s, int element)
 {
@@ -35,24 +43,30 @@ void push(struct Stack *s, int element)
     }
     s->data[s->top] = element;
     s->top += 1;
+    printf("Push: %d\n", element);
 }
 
 
-bool isEmpty(const struct Stack *s)
-
-
-int main(int argc, char* argv[])
+int pop(struct Stack *s)
 {
-    struct Stack stack;
-    init(&stack);
-    push(&stack, 1);
-    push(&stack, 2);
-    push(&stack, 3);
-    
-    for (int i = 0; i < stack.top; i++)
+    if (isEmpty(s))
     {
-        printf("%d\n", stack.data[i]);
+        printf("Stack empty\n");
+        exit(1);
     }
-    return 0;
+    s->top -= 1;
+    int element = s->data[s->top];
+    printf("Pop: %d\n", element);
+    return element;
 }
+
+
+void printStack(struct Stack *s)
+{
+    for (int i = 0; i < s->top; i++)
+    {
+        printf("%d\n", s->data[i]);
+    }
+}
+
 
