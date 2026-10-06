@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "stack.h"
+#include "Stack.h"
 
 
 void init(struct Stack *s)
@@ -37,6 +37,8 @@ void push(struct Stack *s, int element)
         int *newData = realloc(s->data, s->capacity * sizeof(int));
         if (newData == NULL)
         {
+            free(s->data);
+            s->data = NULL;
             exit(1);
         }
         s->data = newData;
@@ -52,12 +54,12 @@ int pop(struct Stack *s)
     if (isEmpty(s))
     {
         printf("Stack empty\n");
+        free(s->data);
+        s->data = NULL;
         exit(1);
     }
     s->top -= 1;
-    int element = s->data[s->top];
-    printf("Pop: %d\n", element);
-    return element;
+    return s->data[s->top];
 }
 
 
