@@ -79,6 +79,21 @@ void two_stacks_test()
 }
 
 
+void push_and_pop_test()
+{
+    Stack stack;
+    std::cout << "======PUSH AND POP TEST======" << std::endl;
+
+    stack.push(100);
+    stack.push(200);
+    std::cout << "Pop after two pushes: expected 200, actual: " << stack.pop() << std::endl;
+    
+    stack.push(300);
+    std::cout << "Pop after new push: expected 300, actual: " << stack.pop() << std::endl;
+    std::cout << "Pop remaining element: expected 100, actual: " << stack.pop() << std::endl;
+}
+
+
 void empty_stack_test()
 {
     printf("\n======EMPTY STACK TEST======\n");
